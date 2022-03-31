@@ -1,4 +1,4 @@
-x = 1
+x = 10
 if x >= 4:
   print("The number is equal or greater than 4")
 else:
