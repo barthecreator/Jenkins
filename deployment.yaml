@@ -23,12 +23,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+  name: nginx-service-via-jenkins
 spec:
   selector:
     app: nginx
   ports:
-    - nodePort: 322232
+    - protocol: TCP
       port: 80
-      Protocol: TCP
       targetPort: 80
