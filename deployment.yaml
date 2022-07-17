@@ -4,6 +4,7 @@ metadata:
   name: nginx-deployment-via-jenkins
   labels:
     app: nginx
+  namespace: default
 spec:
   replicas: 2
   selector:
