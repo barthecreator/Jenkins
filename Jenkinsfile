@@ -13,7 +13,8 @@ pipeline {
     
     stage('Deploy To Kubernetes'){
       steps {
-        sh 'hostname'
+       script {
+         kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes")
       }
     }
         
