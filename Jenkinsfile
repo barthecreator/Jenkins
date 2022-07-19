@@ -2,7 +2,10 @@ pipeline {
  
  agent {label 'kubepod'}
  
-  
+environment {
+  dockerimagename = "bargab/jenkisnbuildtest"
+  dockerImage = ""
+  }
   stages {
     stage('Git Clone') {
       steps {
@@ -11,14 +14,35 @@ pipeline {
       }
     }
     
-    stage('Deploy To Kubernetes'){
-      steps {
-       script {
-         kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes" , enableConfigSubstitution: false)
-      }
+
+    stage('Build image'){
+        steps{
+            script{
+                dockerImage = docker.build dockerimagename
+            }
+        }
     }
+    
+    stage('Push Image'){
+        environment {
+            registryCredential = 'dockerhub'
+           }
+        steps{
+            docker.withRegistry('https://registry.hub.docker.com', registryCredential ){
+                dockerImage.push("latest")
+            }
+        }
+        }
+        
+    }
+
+    // stage('Deploy To Kubernetes'){
+    //   steps {
+    //    script {
+    //      kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes" , enableConfigSubstitution: false)
+    //   }
+    // }
         
     
   }
   } 
-}
