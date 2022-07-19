@@ -17,7 +17,7 @@ environment {
 
     stage('Build image'){
         steps{
-            script{
+            script {
                 dockerImage = docker.build dockerimagename
             }
         }
@@ -28,12 +28,13 @@ environment {
             registryCredential = 'dockerhub'
            }
         steps{
+            script{
             docker.withRegistry('https://registry.hub.docker.com', registryCredential ){
                 dockerImage.push("latest")
             }
         }
         }
-        
+    
     }
 
     // stage('Deploy To Kubernetes'){
@@ -45,4 +46,4 @@ environment {
         
     
   }
-
+  } 
