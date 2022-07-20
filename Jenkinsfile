@@ -12,15 +12,10 @@ pipeline {
     }
     
 
-    stage('Build image with Kaniko'){
+    stage('Test Jenkins Image'){
         steps{
-            container('kaniko'){
-            script {
-                sh '''
-                /kaniko/executor --dockerfile /Dockerfile \
-                                 --context  \
-                                 --destination=bargab/jenkisnbuildtest:${BUILD_NUMBER}
-            '''
+            script{
+                sh 'hostname'
             }
         }
     }
@@ -35,4 +30,4 @@ pipeline {
         
     
   }
-  } 
+  
