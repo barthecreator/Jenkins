@@ -1,7 +1,7 @@
 pipeline {
  
  agent {
-  label 'kubepod'
+  kubernetes {label 'kubepod'}
   yamlFile 'builder.yaml'
   }
  
