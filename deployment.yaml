@@ -17,4 +17,4 @@ spec:
     spec:
       containers:
       - name: jenkinsbuildimage
-        image: jenkisnbuildtest:<TAG>
+        image: bargab/jenkisnbuildtest:<TAG>
