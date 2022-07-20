@@ -1,6 +1,9 @@
 pipeline {
  
- agent {label 'kubepod'}
+ agent {
+  label 'kubepod'
+  yamlFile 'builder.yaml'
+  }
  
 
   stages {
@@ -12,22 +15,31 @@ pipeline {
     }
     
 
-    stage('Test Jenkins Image'){
+    stage('Build image with Kaniko'){
         steps{
-            script{
-                sh 'hostname'
+            container('kaniko'){
+            script {
+                sh '''
+                /kaniko/executor --dockerfile /Dockerfile \
+                                 --context  \
+                                 --destination=bargab/jenkisnbuildtest:${BUILD_NUMBER}
+            '''
             }
         }
     }
     }
     
-    // stage('Deploy To Kubernetes'){
-    //   steps {
-    //    script {
-    //      kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes" , enableConfigSubstitution: false)
-    //   }
-    // }
+    stage('Deploy App to Kubernetes') {     
+      steps {
+        container('kubectl') {
+          withCredentials([file(credentialsId: 'kubernetes', variable: 'KUBECONFIG')]) {
+            sh 'sed -i "s/<TAG>/${BUILD_NUMBER}/" deployment.yaml'
+            sh 'kubectl apply -f deployment.yaml'
+          }
+        }
+      }
+    }
         
     
   }
-  
+  } 
