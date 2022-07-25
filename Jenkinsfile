@@ -1,9 +1,7 @@
 pipeline {
  
  agent {
-  kubernetes {
-  yamlFile 'builder.yaml'
-  }
+  kubernetes {label 'kubepod'}
  }
  
 
@@ -18,13 +16,12 @@ pipeline {
 
     stage('Build image with Kaniko'){
         steps{
-            container('kaniko'){
             script {
                 sh 'hostname'
             }
         }
     }
-    }
+    
     
     // stage('Deploy App to Kubernetes') {     
     //   steps {
