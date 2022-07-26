@@ -1,18 +1,13 @@
 pipeline {
  
  agent {
-  kubernetes {
-  yamlFile 'builder.yaml'
-  }
- }
- 
-
+  kubernetes { label 'kubepod' }
+}
   stages {
     stage('Git Clone') {
       steps {
-        sh 'whereis git'
-
-          
+        sh 'ping github.com'
+        
       }
     }
    }
