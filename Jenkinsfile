@@ -10,11 +10,10 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        git branch: 'main', url: 'https://github.com/barthecreator/Jenkins.git'
-          
+        git branch: "main", url: "https://github.com/barthecreator/Jenkins.git"        
       }
     }
-    
+  }
 
     stage('Build image with Kaniko'){
         steps{
