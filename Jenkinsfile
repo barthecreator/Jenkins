@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        sh 'where git'
+        sh 'whereis git'
 
           
       }
