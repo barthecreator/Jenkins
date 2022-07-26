@@ -10,8 +10,10 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        git branch: 'main', url: 'https://github.com/barthecreator/Jenkins.git'
+        sh 'cat /etc/resolv.conf'
         sh 'git --version'
+        git branch: 'main', url: 'https://github.com/barthecreator/Jenkins.git'
+        
           
       }
     }
