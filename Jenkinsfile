@@ -11,6 +11,7 @@ pipeline {
     stage('Git Clone') {
       steps {
         git branch: 'main', url: 'https://github.com/barthecreator/Jenkins.git'
+        sh 'git --version'
           
       }
     }
