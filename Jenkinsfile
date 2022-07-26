@@ -10,8 +10,7 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        sh 'whereis git'
-
+        git branch: 'main', url: 'https://github.com/barthecreator/Jenkins.git'
           
       }
     }
@@ -21,11 +20,7 @@ pipeline {
         steps{
             container('kaniko'){
             script {
-                sh '''
-                /kaniko/executor --dockerfile /Dockerfile \
-                                 --context  \
-                                 --destination=bargab/jenkisnbuildtest:${BUILD_NUMBER}
-            '''
+                sh 'hostname'
             }
         }
     }
@@ -44,4 +39,4 @@ pipeline {
         
     
   }
-  } 
+}
