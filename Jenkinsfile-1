@@ -1,0 +1,19 @@
+pipeline {
+ 
+ agent {
+  kubernetes {
+  yamlFile 'builder.yaml'
+  }
+ }
+ 
+
+  stages {
+    stage('Git Clone') {
+      steps {
+        sh 'whereis git'
+
+          
+      }
+    }
+   }
+  }
